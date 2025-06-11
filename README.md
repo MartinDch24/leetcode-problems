@@ -20,7 +20,7 @@ This repository contains my ongoing solutions to algorithm and data structure pr
 
 ---
 
-## 🛠Future Improvements
+## Future Improvements
 
 - Categorize problems by topic (e.g., Graphs, Trees, DP, Greedy)
 - Add time/space complexity analysis to each solution
