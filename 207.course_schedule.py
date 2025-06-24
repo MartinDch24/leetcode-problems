@@ -29,3 +29,35 @@ class Solution(object):
                         q.append(course)
 
         return taken_courses == numCourses
+
+    #Iterative DFS solution with cycle detection:
+    # graph = defaultdict(list)
+    # visited = [0] * numCourses
+    #
+    # for course, req in prerequisites:
+    #     graph[req].append(course)
+    #
+    # for course in range(numCourses):
+    #     if visited[course] != 0:
+    #         continue
+    #
+    #     s = [(course, iter(graph[course]))]
+    #
+    #     while s:
+    #         node, neighbors = s[-1]
+    #
+    #         try:
+    #             neighbor = neighbors.next()
+    #
+    #             if visited[neighbor] == 0:
+    #                 visited[neighbor] = 1
+    #                 s.append((neighbor, iter(graph[neighbor])))
+    #
+    #             elif visited[neighbor] == 1:
+    #                 return False
+    #
+    #         except StopIteration:
+    #             visited[node] = 2
+    #             s.pop()
+    #
+    # return True
