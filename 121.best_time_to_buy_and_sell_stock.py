@@ -4,13 +4,12 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        profit = 0
-        buy = prices[0]
+        min_price = prices[0]   # Minimum price found so far
+        max_profit = 0  # Largest possible profit
 
-        for p in prices:
-            if p < buy:
-                buy = p
-            if profit < p - buy:
-                profit = p-buy
+        for price in prices:
+            min_price = min(min_price, price)   # If the current price is less than min_price, it becomes the new min_price
 
-        return profit
+            max_profit = max(max_profit, price-min_price)   # We check whether selling right now will yield more profit
+
+        return max_profit
