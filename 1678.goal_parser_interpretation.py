@@ -11,3 +11,6 @@ class Solution:
                 curr_command = ""   # Clear the current command string
 
         return res
+
+    # Most intuitive solution (didn't come to mind at first):
+    # return command.replace('()', 'o').replace('(al)', 'al')
