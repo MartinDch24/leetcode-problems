@@ -22,7 +22,7 @@ class Solution:
         # return b
 
     # Memoization solution:
-        # dp = {0: 0, 1: 1}  # Dictionary for memoization, so we avoid recomputing
+        # memo = {0: 0, 1: 1}  # Dictionary for memoization, so we avoid recomputing
         #
         # def helper(x):  # Recursive solution
         #     if x not in memo:  # Only compute if not cached
