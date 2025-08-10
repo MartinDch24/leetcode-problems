@@ -10,3 +10,13 @@ class Solution:
             dp[i] = dp[i - 1] + dp[i - 2]  # Fill in the table
 
         return dp[n]
+
+    #Iterative solution:
+        # if n < 2:
+        #     return n
+        #
+        # a, b = 0, 1
+        # for _ in range(2, n + 1):  # Iterate through the values
+        #     a, b = b, a + b
+        #
+        # return b
