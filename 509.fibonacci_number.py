@@ -11,7 +11,7 @@ class Solution:
 
         return dp[n]
 
-    #Iterative solution:
+    # Iterative solution:
         # if n < 2:
         #     return n
         #
@@ -20,3 +20,13 @@ class Solution:
         #     a, b = b, a + b
         #
         # return b
+
+    # Memoization solution:
+        # dp = {0: 0, 1: 1}  # Dictionary for memoization, so we avoid recomputing
+        #
+        # def helper(x):  # Recursive solution
+        #     if x not in memo:  # Only compute if not cached
+        #         memo[x] = helper(x - 1) + helper(x - 2)
+        #     return memo[x]
+        #
+        # return helper(n)
