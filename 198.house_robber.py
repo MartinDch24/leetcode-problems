@@ -13,4 +13,4 @@ class Solution:
             curr = max(prev2+num, prev1)    # The number of houses so far. We use max() to check whether we'd get more money by robbing the current house and the one 2 before it (not adjacent) or by skipping it and settling for robbing the previous house
             prev2, prev1 = prev1, curr  # Move the window forward
 
-        return prev1 # The max amount of money for n houses
+        return prev1 # The max amount of money for n houses b
