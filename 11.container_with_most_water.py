@@ -1,23 +1,14 @@
-class Solution(object):
-    def maxArea(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        n = len(height)
-        max_area = 0  # Largest container so far
+#Resolved
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        max_area = 0
+        l, r = 0, len(height) - 1
 
-        l = 0  # Left index
-        r = n - 1  # Right index
+        while l < r:
+            # r-l is the width and the shorter height is length of the container
+            max_area = max(max_area, (r-l) * min(height[l], height[r]))
 
-        while l <= r:
-            new_area = min(height[l], height[r]) * (
-                        r - l)  # We take the shorter line and multiply it by the distance to get the water the conatiner can have
-
-            max_area = max(max_area, new_area)
-
-            if height[l] < height[
-                r]:  # We take the shorter line thus far and move towards the inside, since moving the longer line could cause us to loose out on potential area
+            if height[l] < height[r]:   # We always move the shorter line, while shrinking the window, becuase it determines the area of the container
                 l += 1
             else:
                 r -= 1
