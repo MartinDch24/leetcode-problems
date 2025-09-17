@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2 times
 class Solution:
     def rob(self, nums: List[int]) -> int:
         # We have n number of houses
