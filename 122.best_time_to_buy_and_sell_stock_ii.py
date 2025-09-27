@@ -5,8 +5,8 @@ class Solution:
         curr_price = prices[0]  # The current price
 
         for price in prices:
-            if curr_price < price:  # If the new price is higher than the current one - buy
+            if curr_price < price:  # If the new price is higher than the current one - sell
                 profit += price - curr_price
-            curr_price = price  # Update the current price
+            curr_price = price  # Update the current price and buy
 
         return profit
