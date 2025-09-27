@@ -1,15 +1,12 @@
-class Solution(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        res = 0  # Accumulating profit
-        curr_price = prices[0]  # We save yesterday's price in a variable
+#Resolved
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0  # Profit so far
+        curr_price = prices[0]  # The current price
 
         for price in prices:
-            if price > curr_price:  # If today's price is higher than yesterday's we sell and add the profit
-                res += price - curr_price
-            curr_price = price
+            if curr_price < price:  # If the new price is higher than the current one - buy
+                profit += price - curr_price
+            curr_price = price  # Update the current price
 
-        return res
+        return profit
