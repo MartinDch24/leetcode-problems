@@ -22,3 +22,30 @@ class Solution:
                 res += trapped
 
         return res
+
+        #Two-pointer solution:
+
+        # n = len(height)
+        # left, right = 0, n - 1
+        # max_left, max_right = 0, 0
+        # res = 0
+        #
+        # # Initialize a window from the start of the array to the end and shrink it
+        # while left < right:
+        #     if height[left] < height[right]:
+        #         # If the left side is the shorter one, we see if it's the tallest we've seen yet on the left and update accordingly
+        #         if height[left] >= max_left:
+        #             max_left = height[left]
+        #         else:
+        #             # If it isn't the tallest we've seen, that means there's trapped water and the volume is max_left - the current left
+        #             res += max_left - height[left]
+        #         left += 1  # Shrink the window from the left
+        #     else:
+        #         # If the left side is the taller one, we do the same for the right
+        #         if height[right] >= max_right:
+        #             max_right = height[right]
+        #         else:
+        #             res += max_right - height[right]
+        #         right -= 1
+        #
+        # return res
