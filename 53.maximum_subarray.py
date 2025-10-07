@@ -1,14 +1,13 @@
+#Resolved
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        if not nums:
-            return 0
+        #DP solution:
 
-        curr_sum = 0  # The sum we have so far
-        max_sum = nums[0]  # The largest sum so far
+        n = len(nums)
+        dp = [nums[0]] * n  # Max subarray ending at index i
 
-        for i in range(len(nums)):
-            curr_sum = max(nums[i], curr_sum + nums[
-                i])  # We either end the subarray and start a new one at nums[i] or extend the current subarray, depending on which value is greater
-            max_sum = max(max_sum, curr_sum)  # Check if our current sum is greater than the maximum sum
+        for i in range(1, n):
+            # Either continue the previous subarray or start a new one
+            dp[i] = max(dp[i-1] + nums[i], nums[i])
 
-        return max_sum
+        return max(dp)  # Return the largest sum of the calculated ones
