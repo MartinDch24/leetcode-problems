@@ -3,7 +3,7 @@ from bisect import bisect_left
 
 class Solution:
     def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
-        # Sort the envelopes by width ascemdomg and by height descending, so we compare only heights
+        # Sort the envelopes by width ascending and by height descending, so we compare only heights
         envelopes.sort(key=lambda x: (x[0], -x[1]))
 
         largest = []  # largest[i] = the largest envelope in a chain i envelopes deep
