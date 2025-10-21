@@ -1,13 +1,17 @@
+#Resolved
 class Solution:
     def fib(self, n: int) -> int:
-        if n < 2:
+        # The Fibonacci sequence starts with 0 and 1, so we safe guard against those 2 edge cases
+        if n <= 1:
             return n
 
-        dp = [0] * (n + 1)  # A table to save all values, where dp[i] = F(i)
-        dp[1] = 1
+        dp = [0] * (n+1)    # dp[i] = f(i)
+        dp[1] = 1   # F(1) = 1
 
-        for i in range(2, n + 1):
-            dp[i] = dp[i - 1] + dp[i - 2]  # Fill in the table
+        for i in range(2, n+1):
+            # Each new y is formed by adding up the previous 2
+            # y = f(x) = f(x-1) + f(x-2)
+            dp[i] = dp[i-1] + dp[i-2]
 
         return dp[n]
 
