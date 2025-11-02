@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def stoneGameVII(self, stones: List[int]) -> int:
         n = len(stones)
