@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def fib(self, n: int) -> int:
         # The Fibonacci sequence starts with 0 and 1, so we safe guard against those 2 edge cases
