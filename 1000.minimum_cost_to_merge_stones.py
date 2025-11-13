@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def mergeStones(self, stones: List[int], k: int) -> int:
         n = len(stones)
@@ -21,7 +22,7 @@ class Solution:
                 j = i + length - 1
 
                 # Find the split, where it will be cheapest to merge piles from i to m and the piles from m+1 to j
-                # m increases in steps of k-1 to keep subintervals reducable to 1 pile
+                # m increases in steps of k-1 to keep sub-intervals reducible to 1 pile
                 dp[i][j] = min(dp[i][m] + dp[m + 1][j] for m in range(i, j, k - 1))
 
                 # If the current amount of piles can be reduced the 1,
