@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def mySqrt(self, x: int) -> int:
         if x < 2:   # If x is 0 or 1, we can just return it imidietly
