@@ -1,8 +1,9 @@
+#Resolved
 class Solution:
     def stoneGameIII(self, stoneValue: List[int]) -> str:
         n = len(stoneValue)
         dp = [0] * (n + 1)  # dp[i] = maximum score difference with stones stoneValue[i:]
-        # dp[n] = 0 by deafault
+        # dp[n] = 0 by default
 
         for i in range(n - 1, -1, -1):
             dp[i] = -float("inf")
