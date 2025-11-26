@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
         left = max(nums)  # Smallest possible sum
