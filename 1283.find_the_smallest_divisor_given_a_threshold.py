@@ -1,3 +1,6 @@
+import math
+
+
 class Solution:
     def smallestDivisor(self, nums: List[int], threshold: int) -> int:
         left = 1    # Smallest viable divisor
