@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         min_price = prices[0]   # Smallest price so far
