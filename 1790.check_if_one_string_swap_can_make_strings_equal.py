@@ -9,17 +9,17 @@ class Solution:
                 # If we have a mismatch, check if it's the first one
                 if i1 != None:
 
-                    # Check if this is the third mismatch with (if i2)
-                    # Or if swapping our 2 mismatches won't make the strings equal (s1[i] != s2[i1])
-                    # In both cases, the strings can't be equal, so we return False
-                    if i2 or s1[i] != s2[i1]:
+                    # Check if this is the third mismatch
+                    if i2 != None:
                         return False
-
-                    # Otherwise save the index of the second mismatch and keep checking for more mismatches
-                    i2 = i
+                    else:
+                        i2 = i
+                        # Check if swapping i1 and i2 will make strings equal
+                        if not (s1[i1] == s2[i] and s1[i] == s2[i1]):
+                            return False
                 else:
                     # We save the index of the first mismatch
                     i1 = i
 
          # Return True if we have no or 2 mismatches and their swap makes the strings equal
-        return not i1 or (i1 and i2)
+        return (i1 == None) or (i1 != None and i2 != None)
