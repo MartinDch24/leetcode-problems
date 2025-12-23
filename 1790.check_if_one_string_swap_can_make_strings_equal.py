@@ -1,0 +1,25 @@
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        i1 = None   # The index of the 1st mismatch
+        i2 = None   # The index of the 2nd mismatch
+
+        for i, c in enumerate(s1):
+            # Check for differences in s1 and s2 at every index
+            if c != s2[i]:
+                # If we have a mismatch, check if it's the first one
+                if i1 != None:
+
+                    # Check if this is the third mismatch with (if i2)
+                    # Or if swapping our 2 mismatches won't make the strings equal (s1[i] != s2[i1])
+                    # In both cases, the strings can't be equal, so we return False
+                    if i2 or s1[i] != s2[i1]:
+                        return False
+
+                    # Otherwise save the index of the second mismatch and keep checking for more mismatches
+                    i2 = i
+                else:
+                    # We save the index of the first mismatch
+                    i1 = i
+
+         # Return True if we have no or 2 mismatches and their swap makes the strings equal
+        return not i1 or (i1 and i2)
