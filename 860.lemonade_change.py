@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def lemonadeChange(self, bills: List[int]) -> bool:
         fives = 0   # 5 and 10 dollar bills
