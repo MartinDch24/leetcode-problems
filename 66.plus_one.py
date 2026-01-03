@@ -3,7 +3,7 @@ class Solution:
         i = len(digits) - 1 # Start at the last digit
 
         # Make all 9s into 0s and carry 1 over
-        while digits[i] == 9 and i >= 0:
+        while i >= 0 and digits[i] == 9:
             digits[i] = 0
             i -= 1
 
