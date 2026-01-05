@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         n = len(nums)
