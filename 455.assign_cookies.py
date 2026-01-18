@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def findContentChildren(self, g: List[int], s: List[int]) -> int:
         g.sort()    # Sort both the greed and sizes ascending
@@ -17,3 +18,18 @@ class Solution:
                 j += 1
 
         return res
+
+        #Second solution:
+            # g.sort()
+            # s.sort()
+            #
+            # j = 0
+            # n = len(g)
+            #
+            # for i in range(len(s)):
+            #     if g[j] <= s[i]:
+            #         j += 1
+            #         if j >= n:
+            #             break
+            #
+            # return j
