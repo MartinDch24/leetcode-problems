@@ -1,16 +1,12 @@
+#Resolved
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        if not s:  # If s is an empty string
-            return True
-        j = 0  # Track characters in s
+        j = 0   # Iterate over the characters in s
 
-        for i in range(len(t)):
-            # If we find the current char of s in t, move onto the next one
-            if s[j] == t[i]:
+        for c in t:
+            # Check if j < len(s) first to handle s being an empty string
+            if j < len(s) and c == s[j]:
                 j += 1
 
-                # We've found all characters of s in t
-                if j >= len(s):
-                    return True
-
-        return False
+        # j always ends 1 over the last character it matched
+        return j == len(s)
