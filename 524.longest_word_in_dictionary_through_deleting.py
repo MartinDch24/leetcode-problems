@@ -1,7 +1,7 @@
 class Solution:
     def findLongestWord(self, s: str, dictionary: List[str]) -> str:
         def is_subsequence(word):
-            j = 0  # Iterate over the word seperately
+            j = 0  # Iterate over the word separately
             for c in s:
                 # Make sure the index is valid and compare the characters
                 if j < len(word) and c == word[j]:

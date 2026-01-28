@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         #O(n) time, O(1) space solution:
@@ -18,7 +18,7 @@ class Solution:
             # Reinforce element
             if candidate == num:
                 count += 1
-            # Decrease majority of the current canidate
+            # Decrease majority of the current candidate
             else:
                 count -= 1
 
