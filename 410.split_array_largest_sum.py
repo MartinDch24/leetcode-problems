@@ -1,27 +1,24 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
-        left = max(nums)  # Smallest possible sum
-        right = sum(nums)  # The largest possible sum
+        left = max(nums)    # Smallest feasible sum
+        right = sum(nums)   # Largest possible sum
 
         while left <= right:
-            mid = (left + right) // 2  # Candidate largest subarray sum
+            mid = (left + right) // 2   # Candidate largest sum in a subarray
 
-            pieces = 1  # Subarrays we've split into
-            curr_sum = 0  # The sum of the current subarray
-
+            curr = 0    # Current subarray sum
+            splits = 1
             for n in nums:
-                if n + curr_sum <= mid:
-                    curr_sum += n  # Add to the current subarray
-                else:
-                    pieces += 1  # Increase pieces and start a new subarray sum
-                    curr_sum = n
+                if curr + n > mid:
+                    splits += 1
+                    curr = 0
+                curr += n
 
-            # If we have less pieces than we can, we decrease mid, by reducing right
-            if pieces <= k:
-                right = mid - 1
-            # Otherwise increase mid, by increasing left
+            # If we have too many splits, then we need a larger max sum
+            if splits > k:
+                left = mid+1
             else:
-                left = mid + 1
+                right = mid-1
 
-        return left  # Last valid value
+        return left # Left will hold the last valid max sum
