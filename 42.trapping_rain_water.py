@@ -2,7 +2,7 @@ class Solution:
     def trap(self, height: List[int]) -> int:
         n = len(height)
         max_left = [0] * n  # The tallest bar to the left of height[i]
-        max_right = [0] * n # The tallest bar to the right of heigh[i]
+        max_right = [0] * n # The tallest bar to the right of height[i]
         res = 0
 
         curr_max = 0    # The tallest bar so far
@@ -47,5 +47,25 @@ class Solution:
         #         else:
         #             res += max_right - height[right]
         #         right -= 1
+        #
+        # return res
+
+        #Monotonic Stack solution:
+
+        # res = 0
+        #
+        # stack = []  # Store descending heights
+        # for i in range(len(height)):
+        #     while stack and height[stack[-1]] < height[i]:
+        #         idx = stack.pop()
+        #         if not stack:
+        #             break
+        #
+        #         bottom = height[idx]  # The height of the bottom of the container
+        #         left = height[stack[-1]]  # The height of the left wall
+        #         right = height[i]  # The height of the right wall
+        #         # <the height of the trapped water> * <the width it spans>
+        #         res += (min(left, right) - bottom) * (i - stack[-1] - 1)
+        #     stack.append(i)
         #
         # return res
