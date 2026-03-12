@@ -1,25 +1,21 @@
-#Resolved
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        if not s:  # Skip initializing max_len, left and the set
+#Resolved - 2
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:   # Skip initializing all of the values bellow
             return 0
 
-        unique_chars = set()  # Store all unique characters found so far
         max_len = 0
+        seen = set() # Contains all unique characters in the sliding window
+        left = 0
 
-        left = 0  # The first index of the substring
-        for right, c in enumerate(s):  # We call the index right, so left makes more sense
-            while c in unique_chars:  # While new character is already in the substring
-                unique_chars.remove(s[
-                                        left])  # Start removing characters from the substring, left to right, until there no longer is a duplicate
+        for right in range(len(s)):
+            # Shrink from the left, until the duplicate is removed
+            while s[right] in seen:
+                seen.remove(s[left])
                 left += 1
+            # Add the new character to the set
+            seen.add(s[right])
 
-            unique_chars.add(c)  # Finally add the new character, the previous instance of which we removed
-
-            max_len = max(max_len, right - left + 1)  # We add +1, because left and right are indices
+            max_len = max(max_len, right - left + 1)
 
         return max_len
