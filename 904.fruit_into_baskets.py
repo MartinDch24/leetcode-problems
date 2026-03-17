@@ -1,25 +1,26 @@
+#Resolved
 from collections import defaultdict
 
 
-class Solution(object):
-    def totalFruit(self, fruits):
-        """
-        :type fruits: List[int]
-        :rtype: int
-        """
-        max_fruits = 0
-        window = defaultdict(int)   # {<fruit1>: <it's count>, ....}
-
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        fruit_count = defaultdict(int)  # {fruit: <how many times it appears in the current window>, ...}
         left = 0
-        for right in range(len(fruits)):
-            window[fruits[right]] += 1  # Add a new fruit as we move along
+        max_fruits = 0
 
-            while len(window) > 2:  # If we have more than 2 types of fruit
-                window[fruits[left]] -= 1   # Start removing from the left
-                if window[fruits[left]] == 0:
-                    del window[fruits[left]]    # If there is no more of this fruit, delete the key in window
-                left += 1   # Increment left and continue shrinking the window
+        for right, fruit in enumerate(fruits):
+            fruit_count[fruit] += 1
 
-            max_fruits = max(max_fruits, right - left + 1)  # Check whether the new window is longer than the previous ones
+            # While we have more than 2 unique fruits,
+            # Keep removing from the left, until only 2 unique ones are left
+            while len(fruit_count) > 2:
+                fruit_count[fruits[left]] -= 1
+
+                if fruit_count[fruits[left]] == 0:
+                    del fruit_count[fruits[left]]
+
+                left += 1
+
+            max_fruits = max(max_fruits, right - left + 1)
 
         return max_fruits
