@@ -1,39 +1,40 @@
+#Resolved
 from collections import Counter
 
 
-class Solution(object):
-    def minWindow(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        if not t or not s:
-            return ""
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        freq_t = Counter(t)  # {<char of t>: <how many times it appears in t>, ...}
+        freq_window = Counter()  # {<char in current window>: <its count>}
 
-        t_freq = Counter(t) # {<char>: <times it appears>, ...}
-        window = Counter()   # window of {<char>: <times it appears>, ...}, which will change as we move left and right
-        have, need_chars = 0, len(t_freq)   # Have is the number of unique characters we have enough of and need is the number of unique characters we need
-        res = [-1, -1]  # left and right for the result substring
-        res_len = float('inf')  # the smallest length of a substring
+        res = [-1, -1]  # [left, right] of the substring
+        res_len = float('inf')  # the length of the substring
 
+        # Each time we have enough units of a unique char, we add to char
+        # We want to have enough of each unique char to satisfy need
+        have, need = 0, len(freq_t)
         left = 0
-        for right in range(len(s)):
-            c = s[right]    # Next character
-            window[c] += 1  # Increase its frequnecy in the window
 
-            if c in t_freq and window[c] == t_freq[c]:  # If the new needed characters contain the new one and we now have as much of this character as we need, we add +1 to have
+        for right, char in enumerate(s):
+            freq_window[char] += 1
+
+            if char in freq_t and freq_window[char] == freq_t[char]:
                 have += 1
 
-            while have == need_chars:   # While the window includes all needed characters for it to be viable
-                if (right - left + 1) < res_len:    # We check whether the new length is shorter than the old one
-                    res = [left, right] # Add new left and right for the substring
-                    res_len = right - left + 1  # Change the min length
+            # Shrink the window, but keep it valid
+            while have == need:
+                # Check if we've found a shorter valid substring
+                if right - left + 1 < res_len:
+                    res = [left, right]
+                    res_len = right - left + 1
 
-                window[s[left]] -= 1    # Remove the left-most character as we shrink the window
-                if s[left] in t_freq and window[s[left]] < t_freq[s[left]]: # If the left-most character was one we needed and its not a useless duplicate, we lose 1 of the characters we need, hence have -= 1
+                curr = s[left]
+                freq_window[curr] -= 1
+
+                if curr in freq_t and freq_window[curr] < freq_t[curr]:
                     have -= 1
                 left += 1
 
-        l, r = res
-        return s[l:r+1] if res_len != float('inf') else ""  # We return a substring, only if we've found a viable substring, which would've caused res_len to change from its inital float('inf'), otherwise we return an empty string
+        if res_len == float('inf'):
+            return ""
+        return s[res[0]: res[1] + 1]
