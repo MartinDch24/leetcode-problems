@@ -1,3 +1,4 @@
+#Resolved
 from collections import defaultdict
 
 
@@ -18,3 +19,17 @@ class Solution:
             prefix[curr_sum] += 1
 
         return res
+
+    # More efficient solution:
+    #     res = 0
+    #     pref = {0: 1}
+    #     curr_sum = 0
+    #
+    #     for num in nums:
+    #         curr_sum += num
+    #
+    #         res += pref.get(curr_sum - k, 0)
+    #
+    #         pref[curr_sum] = pref.get(curr_sum, 0) + 1
+    #
+    #     return res
