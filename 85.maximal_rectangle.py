@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         m = len(matrix[0])
