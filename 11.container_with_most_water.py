@@ -1,16 +1,20 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        max_area = 0
-        l, r = 0, len(height) - 1
+        res = 0
+        n = len(height)
+        left = 0
+        right = n - 1
 
-        while l < r:
-            # r-l is the width and the shorter height is length of the container
-            max_area = max(max_area, (r-l) * min(height[l], height[r]))
+        while left < right:
+            # The height of the container is the height of the shorter bar
+            width = min(height[left], height[right]) * (right - left)
+            res = max(res, width)
 
-            if height[l] < height[r]:   # We always move the shorter line, while shrinking the window, becuase it determines the area of the container
-                l += 1
+            # Move the shorter bar to try to increase the container height
+            if height[left] < height[right]:
+                left += 1
             else:
-                r -= 1
+                right -= 1
 
-        return max_area
+        return res
