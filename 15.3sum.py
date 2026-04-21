@@ -1,27 +1,32 @@
+#Resolved
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         res = []
+        n = len(nums)
 
-        for i in range(len(nums)-2):
-            if i > 0 and nums[i] == nums[i-1]:  # If the current number is the same as the previous, we'd have duplicate
+        for i in range(n - 2):
+            # Remove duplicates
+            if i > 0 and nums[i - 1] == nums[i]:
                 continue
 
-            j, k = i+1, len(nums)-1 # We make a window with the left end being the first index+1 and the last index 
+            j, k = i + 1, n - 1
             while j < k:
-                if nums[j] + nums[k] == -nums[i]:   # We check whether the total sum is 0
-                    res.append([nums[i], nums[j], nums[k]]) # Add the numbers to the result
+                # Take -nums[i] as a target sum for nums[j] + nums[k]
+                if nums[j] + nums[k] == -nums[i]:
+                    res.append([nums[i], nums[j], nums[k]])
 
-                    while j < k and nums[j] == nums[j+1]:   # Since the list is sorted, we can just push j and k in, until we skip all possible duplicates
+                    # Remove duplicates
+                    while j < k and nums[j] == nums[j + 1]:
                         j += 1
-                    while j < k and nums[k] == nums[k-1]:
+                    while j < k and nums[k - 1] == nums[k]:
                         k -= 1
 
                     j += 1
                     k -= 1
                 elif nums[j] + nums[k] < -nums[i]:
-                    j += 1  # Increase the sum of the 2nd and 3rd number, by shrinking the left end of the window
+                    j += 1  # Increase sum
                 else:
-                    k -= 1  # Decrease the sum of 2nd and 3rd number, by shrinking the right end
+                    k -= 1  # Decrease sum
 
         return res
