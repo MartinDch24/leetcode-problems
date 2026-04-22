@@ -1,32 +1,22 @@
+#Resolved
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums.sort()
-        dist = float("inf")
-        res = 0
+        res = nums[0] + nums[1] + nums[2]
+        n = len(nums)
 
-        for i in range(len(nums) - 2):  # Fix the first index in place
-            if i > 0 and nums[i] == nums[i - 1]:  # Skip duplicates to have less iterations
-                continue
+        for i in range(n - 2):
+            j, k = i + 1, n - 1
 
-            j, k = i + 1, len(nums) - 1  # Initialize two pointers for the remaining range
             while j < k:
-                total = nums[i] + nums[j] + nums[k]
+                curr_sum = nums[i] + nums[j] + nums[k]
 
-                if total < target:  # If the sum is bellow target, check whether the distance is closer than before
-                    if dist > target - total:
-                        dist = target - total
-                        res = total
+                if abs(target - curr_sum) < abs(target - res):
+                    res = curr_sum
 
-                    j += 1  # Shrink from the left
-
-                elif total > target:  # If the sum is larger than target, check the distance
-                    if dist > total - target:
-                        dist = total - target
-                        res = total
-
-                    k -= 1  # Shrink from the right
-
-                else:  # In this case, the sum is equal to the target and the distance is 0, so we just return it
-                    return total
+                if curr_sum < target:
+                    j += 1  # Increase sum
+                else:
+                    k -= 1  # Decrease sum
 
         return res
