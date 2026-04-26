@@ -1,12 +1,17 @@
+#Resolved
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        l, r = 0, len(numbers) - 1
+        left, right = 0, len(numbers)-1
+        curr_sum = 0
 
-        while l < r:
-            s = numbers[l] + numbers[r] # The current sum
-            if s == target:
-                return [l+1, r+1]  # 1-indexed
-            elif s < target:    # If it's less than the target, we move l up to increase the sum
-                l += 1
-            else:   # If it is more, we move the r down to decrease the sum
-                r -= 1
+        while left < right:
+            curr_sum = numbers[left] + numbers[right]
+
+            # Since the numbers are in ascending order,
+            # we can pick a number further left or right to increase or increase the sum, so it can match target
+            if curr_sum < target:
+                left += 1
+            elif curr_sum > target:
+                right -= 1
+            else:
+                return [left+1, right+1]    # 1-indexed
