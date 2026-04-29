@@ -1,14 +1,11 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        if not nums:    # No duplicates if there aren't any numbers
-            return 0
+        next_idx = 1  # Index of the next unique number
 
-        i = 0   # The indices of the unique numbers
-        for j in range(1, len(nums)):
-            # Each time we find a unique number, we place it next to the previous unique one
-            if nums[i] != nums[j]:
-                i += 1
-                nums[i] = nums[j]
+        for i in range(1, len(nums)):
+            if nums[i - 1] != nums[i]:
+                nums[next_idx] = nums[i]
+                next_idx += 1
 
-        return i + 1    # Add 1, because i is an index and we want a count
+        return next_idx
