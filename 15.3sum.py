@@ -11,7 +11,7 @@ class Solution:
                 continue
 
             for j in range(i + 1, n - 2):
-                # Skip dublicates
+                # Skip duplicates
                 if j > i + 1 and nums[j - 1] == nums[j]:
                     continue
 
