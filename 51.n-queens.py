@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         cols = set()  # Track cols where there already is a queen
