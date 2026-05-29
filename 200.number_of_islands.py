@@ -1,10 +1,7 @@
+#Resolved
 from collections import deque
-class Solution(object):
-    def numIslands(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
         m = len(grid)
         n = len(grid[0])
 
@@ -31,24 +28,26 @@ class Solution(object):
 
         # m = len(grid)
         # n = len(grid[0])
+        # res = 0
         #
-        # islands = 0
+        # directions = ((-1, 0), (1, 0), (0, -1), (0, 1))
         #
         # def dfs(r, c):
-        #     stack = [(r, c)]
-        #     while stack:
-        #         r, c = stack.pop()
-        #         if 0 <= r < m and 0 <= c < n and grid[r][c] == "1":
-        #             grid[r][c] = "0"
-        #             stack.append((r + 1, c))
-        #             stack.append((r - 1, c))
-        #             stack.append((r, c + 1))
-        #             stack.append((r, c - 1))
+        #     # Mark as visited
+        #     grid[r][c] = "0"
+        #
+        #     for d1, d2 in directions:
+        #         new_r = r + d1
+        #         new_c = c + d2
+        #
+        #         if 0 <= new_r < m and 0 <= new_c < n and grid[new_r][new_c] == "1":
+        #             dfs(new_r, new_c)
         #
         # for i in range(m):
         #     for j in range(n):
         #         if grid[i][j] == "1":
-        #             islands += 1
+        #             res += 1
+        #             # Mark all connected parts as visited
         #             dfs(i, j)
         #
-        # return islands
+        # return res

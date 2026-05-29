@@ -23,7 +23,7 @@ class Solution:
                             board[r][c] = temp
                             return True
 
-                            # Couldn't contiue the word from this cell, so we move backwards
+                            # Couldn't continue the word from this cell, so we move backwards
             board[r][c] = temp
             return False
 
