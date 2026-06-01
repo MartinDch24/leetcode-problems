@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         m = len(grid)
