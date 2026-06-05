@@ -1,6 +1,4 @@
-from collections import deque
-
-
+#Resolved
 # Definition for a Node.
 class Node(object):
     def __init__(self, val = 0, neighbors = None):
@@ -8,30 +6,27 @@ class Node(object):
         self.neighbors = neighbors if neighbors is not None else []
 
 
-class Solution(object):
-    def cloneGraph(self, node):
-        """
-        :type node: Node
-        :rtype: Node
-        """
+from typing import Optional
+
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
 
-        clones = {}
+        copy = {node: Node(val=node.val)}
+        s = [node]
 
-        clones[node] = Node(node.val)
-        queue = deque([node])
+        while s:
+            curr_node = s.pop()
 
-        while queue:
-            curr = queue.popleft()
-            curr_neighbors = []
+            for n in curr_node.neighbors:
+                # Track already processed nodes
+                if n not in copy:
+                    copy[n] = Node(val=n.val)
+                    s.append(n)
 
-            for neighbor in curr.neighbors:
-                if neighbor not in clones:
-                    clones[neighbor] = Node(neighbor.val)
-                    queue.append(neighbor)
+                # Connect neighbors
+                copy[curr_node].neighbors.append(copy[n])
 
-                curr_neighbors.append(clones[neighbor])
-            clones[curr].neighbors = curr_neighbors
-
-        return clones[node]
+        return copy[node]
