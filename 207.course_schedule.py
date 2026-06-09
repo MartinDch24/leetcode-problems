@@ -1,32 +1,28 @@
-#Resolved
-from collections import defaultdict, deque
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
-        graph = defaultdict(list)   # node: [neighbor1, ...]
-        in_degree = [0] * numCourses    # How many courses need to be taken before course i
-        courses_taken = 0
+#Resolved - 2
+from collections import defaultdict
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        depend = [0] * numCourses  # depend[c] = <how many courses to take before you can take c>
+        graph = defaultdict(list)  # graph[a] = b -> edge from a to b
+        taken = 0
 
         for a, b in prerequisites:
-            graph[b].append(a)  # Course a is dependent on course b
-            in_degree[a] += 1   # Course a has +1 course to be taken before it
+            graph[b].append(a)
+            depend[a] += 1
 
-        q = deque(i for i in range(numCourses) if not in_degree[i]) # We initialize the queue with all independent courses
+        stack = [course for course in range(numCourses) if depend[course] == 0]
+        while stack:
+            curr = stack.pop()
+            taken += 1
 
-        while q:
-            course = q.popleft()
-            courses_taken += 1
+            for course in graph[curr]:
+                depend[course] -= 1
+                if depend[course] == 0:
+                    stack.append(course)
 
-            for dependent in graph[course]:
-                in_degree[dependent] -= 1   # We take the popped course and deduct it from its neighbor's dependencies
-                if in_degree[dependent] == 0:
-                    q.append(dependent) # If a course has no more dependencies, we append it to the queue
-
-        return courses_taken == numCourses  # If there are cycles in the graph, courses_taken will be less than numCourses
+        return taken == numCourses
 
 
     #Iterative DFS solution with cycle detection:
