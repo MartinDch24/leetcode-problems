@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 from collections import defaultdict
 
 
@@ -25,34 +25,32 @@ class Solution:
         return taken == numCourses
 
 
-    #Iterative DFS solution with cycle detection:
-    # graph = defaultdict(list)
-    # visited = [0] * numCourses
+    #DFS solution with cycle detection:
+
     #
-    # for course, req in prerequisites:
-    #     graph[req].append(course)
+    # class Solution:
+    #     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    #         graph = defaultdict(list)
     #
-    # for course in range(numCourses):
-    #     if visited[course] != 0:
-    #         continue
+    #         for a, b in prerequisites:
+    #             graph[b].append(a)
     #
-    #     s = [(course, iter(graph[course]))]
+    #         state = [0] * numCourses  # 0, 1 or 2
     #
-    #     while s:
-    #         node, neighbors = s[-1]
+    #         def dfs(node):
+    #             if state[node] == 1:
+    #                 return False  # Cycle detected
+    #             elif state[node] == 2:
+    #                 return True  # Node has been fully processed, so it is safe
     #
-    #         try:
-    #             neighbor = neighbors.next()
+    #             state[node] = 1
+    #             for neighbor in graph[node]:
+    #                 if not dfs(neighbor):
+    #                     return False
+    #             state[node] = 2
+    #             return True
     #
-    #             if visited[neighbor] == 0:
-    #                 visited[neighbor] = 1
-    #                 s.append((neighbor, iter(graph[neighbor])))
-    #
-    #             elif visited[neighbor] == 1:
+    #         for i in range(numCourses):
+    #             if not dfs(i):
     #                 return False
-    #
-    #         except StopIteration:
-    #             visited[node] = 2
-    #             s.pop()
-    #
-    # return True
+    #         return True
