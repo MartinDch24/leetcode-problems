@@ -1,38 +1,39 @@
-class Solution(object):
-    def solve(self, board):
+#Resolved
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
         """
-        :type board: List[List[str]]
-        :rtype: None Do not return anything, modify board in-place instead.
+        Do not return anything, modify board in-place instead.
         """
         m = len(board)
         n = len(board[0])
+        directions = ((0, -1), (0, 1), (-1, 0), (1, 0))
 
-        s = []
-        directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
-
+        stack = []
+        # Add bordering cells that are "O" to the stack and mark them as safe ("S")
         for i in range(m):
-            for j in [0, n-1]:
-                if board[i][j] == "O":
-                    board[i][j] ="S"
-                    s.append((i, j))
-        for i in [0, m-1]:
-            for j in range(n):
-                if board[i][j] == "O":
-                    board[i][j] = "S"
-                    s.append((i, j))
+            if i == 0 or i == m-1:
+                for j in range(n):
+                    if board[i][j] == "O":
+                        stack.append([i, j])
+                        board[i][j] = "S"
+            else:
+                for j in [0, n-1]:
+                    if board[i][j] == "O":
+                        stack.append([i, j])
+                        board[i][j] = "S"
 
-        while s:
-            r, c = s.pop()
+        # Do DFS, to find all Os connected to the ones on the borders
+        while stack:
+            r, c = stack.pop()
 
-            for dr, dc in directions:
-                nr = r+dr
-                nc = c+dc
-
-                if 0 <= nr < m and 0 <= nc < n:
-                    if board[nr][nc] == "O":
-                        board[nr][nc] = "S"
-                        s.append((nr, nc))
-
+            for d1, d2 in directions:
+                new_r = r+d1
+                new_c = c+d2
+                if 0 <= new_r < m and 0 <= new_c < n:
+                    if board[new_r][new_c] == "O":
+                        stack.append([new_r, new_c])
+                        board[new_r][new_c] = "S"
+        
         for i in range(m):
             for j in range(n):
                 if board[i][j] == "S":
