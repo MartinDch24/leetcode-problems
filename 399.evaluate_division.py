@@ -10,7 +10,7 @@ class Solution:
         for i, pair in enumerate(equations):
             a, b = pair
             graph[a].append([b, values[i]])
-            graph[b].append([a, 1/values[i]])
+            graph[b].append([a, 1 / values[i]])
 
         for a, b in queries:
             # Check for non-existent nodes
@@ -26,10 +26,11 @@ class Solution:
             while stack:
                 var, curr_w = stack.pop()
 
-                if var == b and var in graph:
+                if var == b:
                     total_weight = curr_w
                     found = True
                     break
+
                 for neighbor, weight in graph[var]:
                     if neighbor not in visited:
                         stack.append([neighbor, curr_w * weight])
