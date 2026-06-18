@@ -13,14 +13,14 @@ class Solution:
             graph[b].append([a, 1/values[i]])
 
         for a, b in queries:
-            # Check for non-existant nodes
+            # Check for non-existent nodes
             if a not in graph or b not in graph:
                 res.append(-1.0)
                 continue
-            
+
             # Do DFS on the start node(a), looking for the end one(b)
             stack = [[a, 1]]
-            visited= {a}
+            visited = {a}
             total_weight = 1
             found = False
             while stack:
@@ -29,7 +29,7 @@ class Solution:
                 if var == b and var in graph:
                     total_weight = curr_w
                     found = True
-
+                    break
                 for neighbor, weight in graph[var]:
                     if neighbor not in visited:
                         stack.append([neighbor, curr_w * weight])
