@@ -1,50 +1,41 @@
-from collections import deque, defaultdict
+from collections import defaultdict
 
 
-class Solution(object):
-    def calcEquation(self, equations, values, queries):
-        """
-        :type equations: List[List[str]]
-        :type values: List[float]
-        :type queries: List[List[str]]
-        :rtype: List[float]
-        """
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         graph = defaultdict(list)
-
-        for i, edge in enumerate(equations):
-            a, b = edge
-            graph[a].append((b, values[i]))
-            graph[b].append((a, 1 / values[i]))
-
         res = []
 
-        for start, end in queries:
-            if start not in graph or end not in graph:
-                res.append(-1)
-                continue
-            if start == end:
-                res.append(1)
-                continue
+        # Build graph with weight on edges
+        for i, pair in enumerate(equations):
+            a, b = pair
+            graph[a].append([b, values[i]])
+            graph[b].append([a, 1/values[i]])
 
-            q = deque([(start, 1)])
-            visited = {start}
+        for a, b in queries:
+            # Check for non-existant nodes
+            if a not in graph or b not in graph:
+                res.append(-1.0)
+                continue
+            
+            # Do DFS on the start node(a), looking for the end one(b)
+            stack = [[a, 1]]
+            visited= {a}
+            total_weight = 1
             found = False
+            while stack:
+                var, curr_w = stack.pop()
 
-            while q and not found:
-                node, curr_weight = q.popleft()
+                if var == b and var in graph:
+                    total_weight = curr_w
+                    found = True
 
-                for neighbor, weight in graph[node]:
+                for neighbor, weight in graph[var]:
                     if neighbor not in visited:
-                        if neighbor == end:
-                            res.append(curr_weight * weight)
-                            found = True
-                            break
-
+                        stack.append([neighbor, curr_w * weight])
                         visited.add(neighbor)
-                        q.append((neighbor, curr_weight * weight))
 
-            if not found:
-                res.append(-1)
+            res.append(total_weight if found else -1.0)
 
         return res
 
