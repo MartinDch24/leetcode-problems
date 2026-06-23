@@ -1,36 +1,30 @@
+#Resolved
 import heapq
 
 
-class Solution(object):
-    def minimumEffortPath(self, heights):
-        """
-        :type heights: List[List[int]]
-        :rtype: int
-        """
+class Solution:
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
         m = len(heights)
         n = len(heights[0])
-        directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
-
-        min_effort = [[float('inf')] * n for _ in range(m)]
-        min_effort[0][0] = 0
-
-        heap = [(0, 0, 0)]  # (effort_so_far, row, col)
-
+        directions = ((0, -1), (0, 1), (-1, 0), (1, 0))
+        
+        heap = [[0, 0, 0]]  # Store route effort, row and col for each unfinished node
+        dist = {(0, 0): 0}  # dist[node] = minimum effort found so far to reach this node
         while heap:
-            effort, r, c = heapq.heappop(heap)
-
-            if r == m - 1 and c == n - 1:
-                return effort
-
-            for dr, dc in directions:
-                nr, nc = r + dr, c + dc
-
-                if 0 <= nr < m and 0 <= nc < n:
-                    new_effort = max(effort, abs(heights[nr][nc] - heights[r][c]))
-
-                    if new_effort < min_effort[nr][nc]:
-                        min_effort[nr][nc] = new_effort
-                        heapq.heappush(heap, (new_effort, nr, nc))
+            curr_eff, r, c = heapq.heappop(heap)
+            if curr_eff > dist.get((r, c), float('inf')):
+                continue
+            
+            for d1, d2 in directions:
+                new_r = r+d1
+                new_c = c+d2
+                if 0 <= new_r < m and 0 <= new_c < n:
+                    new_eff = max(curr_eff, abs(heights[r][c] - heights[new_r][new_c]))
+                    if new_eff < dist.get((new_r, new_c), float('inf')):
+                        dist[(new_r, new_c)] = new_eff
+                        heapq.heappush(heap, [new_eff, new_r, new_c])
+            
+        return dist[(m-1, n-1)]
 
 
         #Union Find solution:
