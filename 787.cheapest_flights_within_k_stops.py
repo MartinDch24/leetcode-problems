@@ -1,3 +1,4 @@
+#Resolved
 from collections import defaultdict
 import heapq
 
@@ -17,7 +18,7 @@ class Solution:
             if curr_w > dist.get((node, stops), float('inf')) or stops > k+1:
                 continue
             
-            # First time we reach dst, is with the shortes distance
+            # First time we reach dst, is with the shortest distance
             if node == dst:
                 return curr_w
 
