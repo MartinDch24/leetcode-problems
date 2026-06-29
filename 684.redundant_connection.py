@@ -1,3 +1,4 @@
+# Resolved
 from collections import deque, defaultdict
 
 
@@ -28,19 +29,29 @@ class Solution(object):
             graph[b].append(a)
 
         #Union Find solution:
-        # n = len(edges)
-        #
-        # parent = [i for i in range(n + 1)]
-        # for a, b in edges:
-        #     ra = a
-        #     while parent[ra] != ra:
-        #         parent[ra], ra = parent[parent[ra]], parent[ra]
-        #
-        #     rb = b
-        #     while parent[rb] != rb:
-        #         parent[rb], rb = parent[parent[rb]], parent[rb]
-        #
-        #     if ra == rb:
-        #         return [a, b]
-        #
-        #     parent[ra] = rb
+        # class Solution:
+        #     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        #         parent = [x for x in range(len(edges)+1)]
+
+        #         def find(x):
+        #             while parent[x] != x:
+        #                 # Compress the path
+        #                 parent[x] = parent[parent[x]]
+        #                 # Find the root
+        #                 x = parent[x]
+        #             return x
+
+        #         def union(a, b):
+        #             # Get the roots of the 2 nodes
+        #             root_a = find(a)
+        #             root_b = find(b)
+
+        #             # Connect the nodes if they have different roots
+        #             if root_a != root_b:
+        #                 parent[root_b] = root_a
+
+        #         for a, b in edges:
+        #             # Check for the redundant edge
+        #             if find(a) == find(b):
+        #                 return [a, b]
+        #             union(a, b)
