@@ -1,52 +1,36 @@
-from collections import deque
-
-
-class Solution(object):
-    def findCircleNum(self, isConnected):
-        """
-        :type isConnected: List[List[int]]
-        :rtype: int
-        """
+#Resolved
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
         n = len(isConnected)
-        visited = set()
-        provinces = 0
+        parent = [i for i in range(n)]
+        # Rank trees by height
+        rank = [0 for _ in range(n)]
+        provinces = set()
+
+        def find(x):
+            while x != parent[x]:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+        
+        def union(a, b):
+            root_a = find(a)
+            root_b = find(b)
+                
+            if root_a != root_b:
+                # Merge the smaller tree into the larger one
+                if rank[root_a] > rank[root_b]:
+                    parent[root_b] = root_a
+                elif rank[root_a] < rank[root_b]:
+                    parent[root_a] = root_b
+                else:
+                    parent[root_b] = root_a
+                    rank[root_a] += 1
 
         for i in range(n):
-            if i not in visited:
-                provinces += 1
-                q = deque([i])
+            for j in range(n):
+                if isConnected[i][j]:
+                    union(i, j)
 
-                while q:
-                    city = q.popleft()
-                    visited.add(city)
-
-                    for j in range(n):
-                        if isConnected[city][j] and j not in visited:
-                            q.append(j)
-
-        return provinces
-
-    #Union Find solution:
-    # n = len(isConnected)
-    # parent = list(range(n))
-    #
-    # def find(x):
-    #     root = x
-    #     while parent[root] != root:
-    #         root = parent[root]
-    #     while parent[x] != root:
-    #         parent[x], x = root, parent[x]
-    #     return root
-    #
-    # def union(x, y):
-    #     rootX = find(x)
-    #     rootY = find(y)
-    #     if rootX != rootY:
-    #         parent[rootY] = rootX
-    #
-    # for i in range(n):
-    #     for j in range(i + 1, n):
-    #         if isConnected[i][j]:
-    #             union(i, j)
-    #
-    # return len(set(find(i) for i in range(n)))
+        # The provinces are a set of each node's root, so we return its length
+        return len({find(i) for i in range(n)})
