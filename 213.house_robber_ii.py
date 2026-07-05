@@ -1,9 +1,10 @@
+#Resolved
 class Solution:
     def rob(self, nums: List[int]) -> int:
         if len(nums) == 1:
             return nums[0]
 
-        # We can either skip the last house or skip the first, before starting to rob the housese, since they're adjacent
+        # We can either skip the last house or skip the first, before starting to rob the houses, since they're adjacent
         prev1_first, prev2_first = 0, 0
 
         for n in nums[:-1]: # Skip last house
@@ -20,3 +21,26 @@ class Solution:
 
         # Since in the end, the highest amount of money for both approaches ends up being stored in curr and from there into prev1, we just compare the prev1 of both approaches and return the higher value
         return max(prev1_first, prev1_second)
+
+        #DP solution:
+        # n = len(nums)
+        #
+        # if n == 1:
+        #     return nums[0]
+        # elif n == 2:
+        #     return max(nums[0], nums[1])
+        #
+        # # dp1: rob houses [0 ... n-2]
+        # dp1 = {0: nums[0], 1: max(nums[0], nums[1])}
+        # # dp2: rob houses [1 ... n-1]
+        # dp2 = {1: nums[1], 2: max(nums[1], nums[2])}
+        #
+        # # Skip the last house
+        # for i in range(2, n - 1):
+        #     dp1[i] = max(dp1[i - 2] + nums[i], dp1[i - 1])
+        #
+        # # Skip the first house
+        # for i in range(3, n):
+        #     dp2[i] = max(dp2[i - 2] + nums[i], dp2[i - 1])
+        #
+        # return max(dp2[n - 1], dp1[n - 2])
