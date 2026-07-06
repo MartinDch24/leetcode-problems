@@ -1,27 +1,27 @@
+#Resolved
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        #DP solution:
-
+        #DP Solution:
         n = len(s)
         dp = [[False] * n for _ in range(n)]
-        start, max_len = 0, 1   # The start index of the result starts with 0 and the max length with 1
+        max_len = 1
+        start = 0
 
+        # All single characters are palindormes
         for i in range(n):
             dp[i][i] = True
-
-        # Build shorter substrings first then move on to longer ones
-        for i in range(n - 1, -1, -1):  # Go backwards
-            for j in range(i + 1, n):
+            
+        for i in range(n-1, -1, -1):
+            for j in range(i+1, n):
                 if s[i] == s[j]:
-                    # j - i == 1 means that the substring has 2 identical characters
-                    # dp[i+1][j-1] checks if the inside is palindromic before adding the 2 new characters on the left and right
-                    if j - i == 1 or dp[i + 1][j - 1]:
+                    # Check if the inside of the palindrome is either a single character or another pre-computed palindrome
+                    if i == j-1 or dp[i+1][j-1]:
                         dp[i][j] = True
-                        # j-i+1 is the length of the new palindrome, so we compare it with max_len so far
-                        if j - i + 1 > max_len:
-                            max_len = j - i + 1
-                            start = i
+                        length = j - i + 1
 
+                        if length > max_len:
+                            max_len = length
+                            start = i
         return s[start:start + max_len]
 
         # n = len(s)
