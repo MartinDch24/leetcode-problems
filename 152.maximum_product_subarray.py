@@ -1,16 +1,23 @@
+#Resolved
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        # Track both the current max and min, because negatives flip the sign
-        curr_max = curr_min = res = nums[0]
+        n = len(nums)
 
-        for num in nums[1:]:
-            # If the num is negative, the signs of min and max get flipped and so we swap them to accomodate that
-            if num < 0:
-                curr_max, curr_min = curr_min, curr_max
+        # dp[i] = (<min product ending at i>, <max product ending at i>)
+        dp = [[nums[0], nums[0]] for _ in range(n)]
+        res = nums[0]
 
-            curr_max = max(num, curr_max * num)
-            curr_min = min(num, curr_min * num)
+        for i in range(1, n):
+            prev_min, prev_max = dp[i - 1]
 
-            res = max(res, curr_max)    # Check if the new max is more than the previous ones
+            if nums[i] < 0:
+                prev_min, prev_max = prev_max, prev_min
+
+            # Either continue the subarray or start a new one
+            curr_min = min(prev_min * nums[i], nums[i])
+            curr_max = max(prev_max * nums[i], nums[i])
+
+            dp[i] = (curr_min, curr_max)
+            res = max(res, curr_max)
 
         return res
