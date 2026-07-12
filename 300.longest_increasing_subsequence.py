@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2
 from bisect import bisect_left
 
 
@@ -6,18 +6,23 @@ class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         # Binary search O(n log n) solution:
 
-        tails = []  # tails[i] = the smallest num that is the end of a subsequence of length i+1
-        for num in nums:
-            # Find the smallest possible number the new num can replace to make that tail smaller
-            idx = bisect_left(tails, num)
-            # If the number fits at the end of the array, append it
-            if idx == len(tails):
-                tails.append(num)
-            else:
-                # Otherwise replace the end of a subsequence of length idx+1 with the new, smaller end
-                tails[idx] = num
+        # tails[i] = <the smallest number subsequence of length i+1 can end on>
+        tails = []
 
-        return len(tails)   # The length of the array is the length of the longest subsequence
+        for num in nums:
+            # Find from where num can extend a subsequence
+            idx = bisect_left(tails, num)
+
+            # if idx == len(tails), then it's the largest tail yet and goes at the end of the list
+            if idx < len(tails):
+                tails[idx] = num
+            else:
+                tails.append(num)
+
+        # tails does not necessarily contain the actual LIS,
+        # but its length is always the LIS length
+        # because the existence of tails[i] guarantees the existence of a subsequence of len i+1
+        return len(tails)
 
         # DP solution:
         # n = len(nums)
