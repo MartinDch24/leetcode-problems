@@ -1,25 +1,24 @@
-class Solution(object):
-    def canPartition(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        sum_of_nums = sum(nums)
+#Resolved
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        total = sum(nums)
 
-        if sum_of_nums % 2 != 0:
+        # If the sum can't be divided in 2 then we know we can't form 2 subsets with equal sums
+        if total % 2 != 0:
             return False
-
-        target = sum_of_nums // 2
-
-        sums = set([0])
-
-        for n in nums:
-            current_sums = set(sums)
-            for s in current_sums:
-                if s + n <= target:
-                    sums.add(s + n)
-
-            if target in sums:
-                return True
-
-        return target in sums
+        
+        # We just need half the sum to prove that it can be divided in 2
+        goal = total // 2
+        # dp[i] = <can we form a subset from nums with a sum of i>
+        dp = [False] * (goal+1)
+        dp[0] = True
+        
+        for num in nums:
+            for i in range(goal, num-1, -1):
+                if i - num < 0:
+                    continue
+                if dp[i - num]:
+                    dp[i] = True
+        
+        return dp[goal]
