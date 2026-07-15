@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         n = len(nums)
