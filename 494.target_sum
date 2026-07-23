@@ -1,0 +1,27 @@
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        '''
+        If we split the numbers into ones with a + and ones with a -
+        We can call their sums into P(positive) and N(negative)
+        P - N = target
+        P + N = sum(nums)
+        So, 2 * P = target + sum(nums)
+        P = (target + sum(nums)) / 2
+        So, what we are actually looking for is if it is possible to make a sum of (target + sum(nums)) / 2
+        '''
+        total = sum(nums)
+        if abs(target) > total:
+            return 0
+        if (target + total) % 2:
+            return 0
+
+        goal = (target + total) // 2
+        # dp[i] = <number of ways to reach sum i, using nums, without repeating them>
+        dp = [0] * (goal+1)
+        dp[0] = 1
+
+        for num in nums:
+            for i in range(goal, num-1, -1):
+                dp[i] += dp[i-num]    
+        
+        return dp[goal]
