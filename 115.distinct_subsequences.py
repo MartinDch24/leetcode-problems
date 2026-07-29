@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         n = len(s)
@@ -16,5 +17,5 @@ class Solution:
                 if s[i-1] == t[j-1]:
                     # Use the current character of s
                     dp[i][j] += dp[i-1][j-1]
-        
+
         return dp[n][m]
