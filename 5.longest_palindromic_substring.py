@@ -1,4 +1,4 @@
-#Resolved
+#Resolved - 2
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         #DP Solution:
