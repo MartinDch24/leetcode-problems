@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         n = len(p)
