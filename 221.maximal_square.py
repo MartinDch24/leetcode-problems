@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         m = len(matrix)
