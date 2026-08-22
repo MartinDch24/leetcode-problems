@@ -1,7 +1,8 @@
+#Resolved
 class Solution:
     def numDecodings(self, s: str) -> int:
         n =len(s)
-        # Check if the begining of the string is valid
+        # Check if the beginning of the string is valid
         if not s or s[0] == "0":
             return 0
         elif n == 1:
