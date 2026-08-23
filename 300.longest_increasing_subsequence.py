@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 from bisect import bisect_left
 
 
