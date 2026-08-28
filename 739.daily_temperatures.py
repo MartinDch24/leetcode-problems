@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         n = len(temperatures)
