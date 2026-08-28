@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         heights.append(0)  # Add a 0 at the end, so we can empty out the stack before ending the loop
