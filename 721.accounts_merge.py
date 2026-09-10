@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         parent = {}  # Treat emails as nodes in a graph and track the root for every email, belonging to a connected component
