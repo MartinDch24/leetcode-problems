@@ -55,3 +55,29 @@ class Solution:
                 return total_weight
 
         return total_weight
+
+        # Prim's algorithm solution:
+
+        # import heapq
+        #
+        # class Solution:
+        #     def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        #         heap = [(0, points[0])]
+        #         visited = set()
+        #         total_cost = 0
+        #
+        #         while heap:
+        #             cost, (x, y) = heapq.heappop(heap)
+        #
+        #             if (x, y) in visited:
+        #                 continue
+        #
+        #             visited.add((x, y))
+        #             total_cost += cost
+        #
+        #             for i in range(len(points)):
+        #                 curr_x, curr_y = points[i]
+        #                 dist = abs(x - curr_x) + abs(y - curr_y)
+        #                 heapq.heappush(heap, (dist, (curr_x, curr_y)))
+        #
+        #         return total_cost
