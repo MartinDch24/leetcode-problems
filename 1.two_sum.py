@@ -1,10 +1,10 @@
-#Resolved
-class Solution(object):
-    def twoSum(self, nums, target):
-        num_idx = {}  # Save the index of numbers we've gone over
-
+#Resolved - 2
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        processed = {}  # Save the nums we've gone over with their index
         for i, num in enumerate(nums):
-            goal = target - num # Since num + goal = target
-            if goal in num_idx:
-                return [i, num_idx[goal]]
-            num_idx[num] = i
+            # Check if we've already found a number, where number + nums[i] = target
+            # number = target - num
+            if target - num in processed:
+                return [processed[target-num], i]
+            processed[num] = i
