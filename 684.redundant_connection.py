@@ -4,14 +4,10 @@ from collections import deque, defaultdict
 
 class Solution(object):
     def findRedundantConnection(self, edges):
-        """
-        :type edges: List[List[int]]
-        :rtype: List[int]
-        """
         graph = defaultdict(list)
 
         for a, b in edges:
-            q = [a]
+            q = deque([a])
             visited = set()
 
             while q:
