@@ -1,4 +1,4 @@
-#Resolvedgit pull
+#Resolved - 2
 from collections import defaultdict
 import heapq
 
@@ -7,25 +7,27 @@ class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         graph = defaultdict(list)
         for a, b, w in flights:
-            graph[a].append([b, w])
-        # [<cumulative weight>, <stops so far>, <curr node>]
-        heap = [[0, 0, src]]
-        # dist[(node, stops)] = <shortest path to node with given stops>
-        dist = {(src, 0): 0}
+            graph[a].append((b, w))
+
+        # total_weight, node, number_of_stops
+        heap = [(0, src, 0)]
+        # dist[a][b] = <cheapest way to get to node a with b stops>
+        dist = [[float('inf') for __ in range(k + 2)] for _ in range(n)]
+        dist[src][0] = 0
+
         while heap:
-            curr_w, stops, node = heapq.heappop(heap)
+            total, node, stops = heapq.heappop(heap)
 
-            if curr_w > dist.get((node, stops), float('inf')) or stops > k+1:
-                continue
-            
-            # First time we reach dst, is with the shortest distance
             if node == dst:
-                return curr_w
+                return total
+            # If we still haven't reached dst and are at k+1 flights (i.e. k stops)
+            if stops > k:
+                continue
 
-            for neighbor, w in graph[node]:
-                new_w = curr_w + w
-                if new_w < dist.get((neighbor, stops+1), float('inf')):
-                    dist[(neighbor, stops+1)] = new_w
-                    heapq.heappush(heap, [new_w, stops+1, neighbor])
-        
+            for neighbor, price in graph[node]:
+                if total + price >= dist[neighbor][stops + 1]:
+                    continue
+                dist[neighbor][stops + 1] = total + price
+                heapq.heappush(heap, (total + price, neighbor, stops + 1))
+
         return -1
