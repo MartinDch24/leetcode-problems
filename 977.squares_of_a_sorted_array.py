@@ -1,3 +1,4 @@
+#Resolved
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
         l = 0
