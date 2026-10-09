@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         nums.sort()
@@ -37,3 +37,34 @@ class Solution:
                         l -= 1
 
         return res
+
+
+        # New Solution:
+
+        # n = len(nums)
+        # nums.sort()
+        # res = []
+        #
+        # for i in range(n):
+        #     if i > 0 and nums[i - 1] == nums[i]:
+        #         continue
+        #
+        #     j = i + 1
+        #     k = n - 1
+        #     while j < k:
+        #         if nums[j] + nums[k] + nums[i] < 0:
+        #             j += 1
+        #         elif nums[j] + nums[k] + nums[i] > 0:
+        #             k -= 1
+        #         else:
+        #             res.append([nums[i], nums[j], nums[k]])
+        #             j += 1
+        #             k -= 1
+        #
+        #         while i + 1 < j < k and nums[j - 1] == nums[j]:
+        #             j += 1
+        #             continue
+        #         while j < k < n - 1 and nums[k + 1] == nums[k]:
+        #             k -= 1
+        #             continue
+        # return res
