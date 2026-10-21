@@ -1,4 +1,4 @@
-#Resolved - 2
+#Resolved - 3
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n <= 2:  # Edge cases
